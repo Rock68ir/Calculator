@@ -22,13 +22,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void keyPadBtnClicked(View view) {
         EditText inputEquation = findViewById(R.id.inputEquation);
-        inputEquation.append(((Button) view).getText());
+        int cursorPosition = inputEquation.getSelectionStart();
+        String enteredText = inputEquation.getText().toString();
+        String startToCursor = enteredText.substring(0, cursorPosition);
+        String cursorToEnd = enteredText.substring(cursorPosition);
+
+        String finalString = startToCursor + ((Button) view).getText() + cursorToEnd;
+        inputEquation.setText(finalString);
+        inputEquation.setSelection(cursorPosition+1);
     }
     public void backBtnClicked(View view) {
         EditText inputEquation = findViewById(R.id.inputEquation);
-        String current = inputEquation.getText().toString();
-        if(!current.isEmpty()) {
-            inputEquation.setText(current.substring(0, current.length() - 1));
+        String enteredText = inputEquation.getText().toString();
+        if(!enteredText.isEmpty()) {
+            int cursorPosition = inputEquation.getSelectionStart();
+            String startToCursor = enteredText.substring(0, cursorPosition-1);
+            String cursorToEnd = enteredText.substring(cursorPosition);
+
+            String finalString = startToCursor + cursorToEnd;
+            inputEquation.setText(finalString);
+            inputEquation.setSelection(cursorPosition-1);
         }
     }
 
@@ -39,7 +52,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void spaceBtnClicked(View view) {
         EditText inputEquation = findViewById(R.id.inputEquation);
-        inputEquation.append(" ");
+        int cursorPosition = inputEquation.getSelectionStart();
+        String enteredText = inputEquation.getText().toString();
+        String startToCursor = enteredText.substring(0, cursorPosition);
+        String cursorToEnd = enteredText.substring(cursorPosition);
+
+        String finalString = startToCursor + " " + cursorToEnd;
+        inputEquation.setText(finalString);
+        inputEquation.setSelection(cursorPosition+1);
     }
 
     @SuppressLint("SetTextI18n")
