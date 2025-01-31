@@ -80,4 +80,20 @@ public class MainActivity extends AppCompatActivity {
         else
             outputEquation.setText(R.string.entered_equation_is_not_valid);
     }
+
+    public void BackPosBtnClicked(View view) {
+        EditText inputEquation = findViewById(R.id.inputEquation);
+        int cursorPosition = inputEquation.getSelectionStart();
+        if(cursorPosition != 0)
+            inputEquation.setSelection(cursorPosition-1);
+        inputEquation.setPressed(true);
+    }
+
+    public void NextPosBtnClicked(View view) {
+        EditText inputEquation = findViewById(R.id.inputEquation);
+        int cursorPosition = inputEquation.getSelectionStart();
+        if(cursorPosition != inputEquation.getText().length())
+            inputEquation.setSelection(cursorPosition+1);
+        inputEquation.setPressed(true);
+    }
 }
