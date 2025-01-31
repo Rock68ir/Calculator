@@ -70,30 +70,45 @@ public class MainActivity extends AppCompatActivity {
         pre.setExpression(currentExp);
         pse.setExpression(currentExp);
         ife.setExpression(currentExp);
-        Toast.makeText(this, pse.getExpression(), Toast.LENGTH_SHORT).show();
-        if(pre.isValid())
-            outputEquation.setText("Answer : " + pre.evaluate() + "\nType : PreFix Expression\nInfix Equation : " + pre.toInfix());
-        else if (pse.isValid())
-            outputEquation.setText("Answer : " + pse.evaluate() + "\nType : PostFix Expression\nInfix Equation : " + pse.toInfix());
-        else if(ife.isValid())
-            outputEquation.setText("Answer : " + ife.evaluate() + "\nType : InFix Expression :\nPostFix Equation : " + ife.infixToPostfix());
+//        Toast.makeText(this, pse.getExpression(), Toast.LENGTH_SHORT).show();
+        if(pre.isValid()) {
+            try {
+                outputEquation.setText("Answer : " + pre.evaluate() + "\nType : PreFix Expression\nInfix Equation : " + pre.toInfix());
+            } catch (ArithmeticException e) {
+                outputEquation.setText(e.getMessage());
+            }
+        }
+        else if (pse.isValid()) {
+            try {
+                outputEquation.setText("Answer : " + pse.evaluate() + "\nType : PostFix Expression\nInfix Equation : " + pse.toInfix());
+            } catch (ArithmeticException e) {
+                outputEquation.setText(e.getMessage());
+            }
+        }
+        else if(ife.isValid()) {
+            try {
+                outputEquation.setText("Answer : " + ife.evaluate() + "\nType : InFix Expression :\nPostFix Equation : " + ife.infixToPostfix());
+            } catch (ArithmeticException e) {
+                outputEquation.setText(e.getMessage());
+            }
+        }
         else
             outputEquation.setText(R.string.entered_equation_is_not_valid);
     }
 
-    public void BackPosBtnClicked(View view) {
-        EditText inputEquation = findViewById(R.id.inputEquation);
-        int cursorPosition = inputEquation.getSelectionStart();
-        if(cursorPosition != 0)
-            inputEquation.setSelection(cursorPosition-1);
-        inputEquation.setPressed(true);
-    }
+        public void BackPosBtnClicked(View view) {
+            EditText inputEquation = findViewById(R.id.inputEquation);
+            int cursorPosition = inputEquation.getSelectionStart();
+            if(cursorPosition != 0)
+                inputEquation.setSelection(cursorPosition-1);
+            inputEquation.setPressed(true);
+        }
 
-    public void NextPosBtnClicked(View view) {
-        EditText inputEquation = findViewById(R.id.inputEquation);
-        int cursorPosition = inputEquation.getSelectionStart();
-        if(cursorPosition != inputEquation.getText().length())
-            inputEquation.setSelection(cursorPosition+1);
-        inputEquation.setPressed(true);
-    }
+        public void NextPosBtnClicked(View view) {
+            EditText inputEquation = findViewById(R.id.inputEquation);
+            int cursorPosition = inputEquation.getSelectionStart();
+            if(cursorPosition != inputEquation.getText().length())
+                inputEquation.setSelection(cursorPosition+1);
+            inputEquation.setPressed(true);
+        }
 }
