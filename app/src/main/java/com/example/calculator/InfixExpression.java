@@ -19,7 +19,7 @@ public class InfixExpression extends PostfixExpression{
         //Shunting Yard algorithm
         Stack<Character> stack = new Stack<>();
         StringBuilder postfix = new StringBuilder();
-
+        int balance = 1;
         String[] tokens = expression.split("\\s+");
 
         for (String token : tokens) {
@@ -35,8 +35,10 @@ public class InfixExpression extends PostfixExpression{
             }
             else if (token.equals("(")) {
                 stack.push('(');
+                balance++;
             }
             else if (token.equals(")")) {
+                balance--;
                 while (!stack.isEmpty() && stack.peek() != '(') {
                     postfix.append(stack.pop()).append(" ");
                 }
@@ -51,8 +53,10 @@ public class InfixExpression extends PostfixExpression{
         while (!stack.isEmpty()) {
             postfix.append(stack.pop()).append(" ");
         }
-
-        return postfix.toString().trim();
+        if(balance == 1)
+            return postfix.toString().trim();
+        else
+            throw new ArithmeticException("Invalid parenthesis!");
     }
 
     public String infixToPostfix() {
