@@ -26,14 +26,17 @@ Built with simplicity and efficiency in mind, this tool is perfect for anyone le
 ### Infix Expression
 - Input: `3 + 4 * 2`
 - Output: `Result: 11 (Infix)`
+- `Postfix: 3 4 2 * +`
 
 ### Postfix Expression
 - Input: `3 4 2 * +`
 - Output: `Result: 11 (Postfix)`
+- `Infix: ((4*2) + 3)`
 
 ### Prefix Expression
 - Input: `+ 3 * 4 2`
 - Output: `Result: 11 (Prefix)`
+- `Infix: ((4*2) + 3)`
 
 ## Installation
 
